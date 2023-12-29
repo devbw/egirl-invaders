@@ -14,7 +14,7 @@
       <button id="start">START</button>
     </div>
     <div class="global">
-      <img src="./img/Mochi.png" id="character" class="character" />
+      <img src="./img/Mochi.png" id="character" class="character no-outline" />
       <div class="counter">
         <p>E-girl repoussées :</p>
         <p id="count">0</p>
@@ -160,6 +160,11 @@
       p {
         margin-left: 5px;
       }
+    }
+
+    .no-outline {
+      outline: none;
+      user-select: none;
     }
 
     .global {
