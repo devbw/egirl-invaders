@@ -1,12 +1,18 @@
 const character = document.getElementById("character");
 const count = document.getElementById("count");
 const start = document.getElementById("start");
+const level = document.getElementById("level");
 const container = document.querySelector(".global");
 const waitscreen = document.querySelector(".waitscreen");
 
 let egirlDied = 0;
 let mouseX = container.clientWidth / 2;
 let vitess = 0.8;
+let numbObstacles = 6;
+let lvl = 1;
+let isAttacking = false;
+
+// EVENTS
 
 start.addEventListener("click", () => {
   waitscreen.style.display = "none";
@@ -19,9 +25,7 @@ container.addEventListener("mousemove", (event) => {
   moveCharacter();
 });
 
-const randNum = () => {
-  return Math.floor(Math.random() * 2) + 1;
-};
+// END EVENTS
 
 const createObstacle = (number) => {
   for (let i = 0; i < number; i++) {
@@ -30,17 +34,17 @@ const createObstacle = (number) => {
     obstacle.className = "obstacle no-outline";
     obstacle.src = choseImg === 1 ? "./img/egirl.png" : "./img/egirl2.png";
     obstacle.style.position = "absolute";
-    obstacle.style.left = `${Math.floor(Math.random() * (container.clientWidth - 20))}px`;
-    obstacle.style.top = `${Math.floor(Math.random() * (container.clientHeight / 3))}px`;
-
-    // Ajouter la propriété direction à l'obstacle (1 pour droite, -1 pour gauche)
+    obstacle.style.left = `${Math.floor(
+      Math.random() * (container.clientWidth - 20)
+    )}px`;
+    obstacle.style.top = `${Math.floor(
+      Math.random() * (container.clientHeight / 3)
+    )}px`;
     obstacle.direction = Math.random() < 0.5 ? 1 : -1;
 
     container.appendChild(obstacle);
   }
 };
-
-createObstacle(7);
 
 const moveObstacles = () => {
   const obstacles = document.querySelectorAll(".obstacle");
@@ -48,7 +52,8 @@ const moveObstacles = () => {
   obstacles.forEach((obstacle) => {
     const obstacleRect = obstacle.getBoundingClientRect();
 
-    obstacle.style.left = obstacleRect.left + obstacle.direction * vitess + "px";
+    obstacle.style.left =
+      obstacleRect.left + obstacle.direction * vitess + "px";
 
     if (obstacleRect.left > container.clientWidth && obstacle.direction === 1) {
       obstacle.style.left = -10 + "px";
@@ -56,14 +61,7 @@ const moveObstacles = () => {
       obstacle.style.left = container.clientWidth + "px";
     }
   });
-
   requestAnimationFrame(moveObstacles);
-};
-
-moveObstacles();
-
-const moveCharacter = () => {
-  character.style.left = mouseX + "px";
 };
 
 const createRocket = () => {
@@ -96,6 +94,7 @@ const createRocket = () => {
           egirlDied += 1;
           count.textContent = egirlDied;
           createObstacle(1);
+          checkLvlUp();
         }
       });
       if (container.contains(rocket)) {
@@ -105,6 +104,54 @@ const createRocket = () => {
       container.removeChild(rocket);
     }
   };
-
   moveRocket();
 };
+
+// UTILS FUNCTIONS
+
+const lvlUp = () => {
+  lvl += 1;
+  level.textContent = lvl;
+  const obstacles = document.querySelectorAll(".obstacle");
+  obstacles.forEach((obstacle) => {
+    container.removeChild(obstacle);
+  });
+  createObstacle(numbObstacles);
+  console.log('coucouuuu')
+};
+
+const checkLvlUp = () => {
+  if (egirlDied === 10) {
+    numbObstacles = 8;
+    isAttacking = true;
+    lvlUp();
+  }
+  if (egirlDied === 30) {
+    numbObstacles = 10;
+    vitess = 0.9;
+    lvlUp();
+  }
+  if (egirlDied === 50) {
+    numbObstacles = 12;
+    vitess = 1.2;
+    lvlUp();
+  }
+  if (egirlDied === 70) {
+    numbObstacles = 14;
+    vitess = 1.6;
+    lvlUp();
+  }
+};
+
+const randNum = () => {
+  return Math.floor(Math.random() * 2) + 1;
+};
+
+const moveCharacter = () => {
+  character.style.left = mouseX + "px";
+};
+
+// SETUP
+
+createObstacle(numbObstacles);
+moveObstacles();
