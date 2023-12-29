@@ -31,7 +31,7 @@ const createObstacle = (number) => {
   }
 }
 
-createObstacle(6)
+createObstacle(7)
 
 container.addEventListener("mousemove", (event) => {
   mouseX = event.clientX;
@@ -69,6 +69,7 @@ const createRocket = () => {
           rocketRect.bottom > obstacleRect.top
         ) {
           container.removeChild(obstacle);
+          container.removeChild(rocket);
           egirlDied += 1;
           count.textContent = egirlDied;
           createObstacle(1);
