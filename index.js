@@ -235,6 +235,21 @@ const checkLvlUp = () => {
     vitess = 1.8;
     lvlUp();
   }
+  if (egirlDied === 110) {
+    numbObstacles = 18;
+    vitess = 1.9;
+    lvlUp();
+  }
+  if (egirlDied === 130) {
+    numbObstacles = 20;
+    vitess = 2;
+    lvlUp();
+  }
+  if (egirlDied === 150) {
+    numbObstacles = 22;
+    vitess = 2.2;
+    lvlUp();
+  }
 };
 
 const randNum = () => {
