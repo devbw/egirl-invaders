@@ -130,7 +130,7 @@ const createEnemyRocket = () => {
     enemyRocket.style.top = obstacleRect.top + 60 + "px";
     container.appendChild(enemyRocket);
 
-    enemyRockets.push(enemyRocket); // Ajoutez chaque projectile à un tableau
+    enemyRockets.push(enemyRocket);
   });
 };
 
