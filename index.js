@@ -1,6 +1,8 @@
 const character = document.getElementById("character");
 const count = document.getElementById("count");
+const gameover = document.getElementById("gameover");
 const start = document.getElementById("start");
+const restart = document.getElementById("restart");
 const lives = document.getElementById("lives");
 const level = document.getElementById("level");
 const container = document.querySelector(".global");
@@ -28,6 +30,10 @@ start.addEventListener("click", () => {
   }, 2000);
 
   moveEnemyRockets();
+});
+
+restart.addEventListener("click", () => {
+  location.reload();
 });
 
 document.addEventListener("click", () => createRocket());
@@ -60,20 +66,21 @@ const createObstacle = (number) => {
 
 const moveObstacles = () => {
   const obstacles = document.querySelectorAll(".obstacle");
+  if(obstacles.length > 0) {
+    obstacles.forEach((obstacle) => {
+      const obstacleRect = obstacle.getBoundingClientRect();
 
-  obstacles.forEach((obstacle) => {
-    const obstacleRect = obstacle.getBoundingClientRect();
+      obstacle.style.left =
+        obstacleRect.left + obstacle.direction * vitess + "px";
 
-    obstacle.style.left =
-      obstacleRect.left + obstacle.direction * vitess + "px";
-
-    if (obstacleRect.left > container.clientWidth && obstacle.direction === 1) {
-      obstacle.style.left = -10 + "px";
-    } else if (obstacleRect.right < -10 && obstacle.direction === -1) {
-      obstacle.style.left = container.clientWidth + "px";
-    }
-  });
-  requestAnimationFrame(moveObstacles);
+      if (obstacleRect.left > container.clientWidth && obstacle.direction === 1) {
+        obstacle.style.left = -10 + "px";
+      } else if (obstacleRect.right < -10 && obstacle.direction === -1) {
+        obstacle.style.left = container.clientWidth + "px";
+      }
+    });
+    requestAnimationFrame(moveObstacles);
+  }
 };
 
 const createRocket = () => {
@@ -162,6 +169,8 @@ const moveEnemyRockets = () => {
   requestAnimationFrame(moveEnemyRockets);
 };
 
+// UTILS FUNCTIONS
+
 const setLife = () => {
   for (let i = 0; i < life; i++) {
     const lifepoint = document.createElement("div");
@@ -182,9 +191,12 @@ const removeLife = () => {
 
 const stopGame = () => {
   console.log('game over')
+  const obstacles = document.querySelectorAll(".obstacle");
+  obstacles.forEach((obstacle) => {
+    container.removeChild(obstacle);
+  });
+  gameover.style.display = "block";
 }
-
-// UTILS FUNCTIONS
 
 const lvlUp = () => {
   lvl += 1;
@@ -232,5 +244,3 @@ const randNum = () => {
 const moveCharacter = () => {
   character.style.left = mouseX + "px";
 };
-
-// SETUP

@@ -10,10 +10,15 @@
   </head>
   <body>
     <div class="waitscreen">
-      <img src="./img/egirlinvader.png" class="logo" />
+      <img src="./img/egirlinvader.png" class="logo"/>
       <button id="start">START</button>
     </div>
     <div class="global">
+      <div id="gameover">
+        <img src="./img/amouranthcrying.png" id="amouranthcrying"/>
+        <h2>GAME OVER</h2>
+        <button id="restart">RESTART</button>
+      </div>
       <img src="./img/Mochi.png" id="character" class="character no-outline" />
       <div class="counter">
         <p>E-girl repoussées :</p>
@@ -219,6 +224,20 @@
       transform: translate(-50%, -50%);
     }
 
+    #gameover {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 30%;
+      text-align: center;
+      display: none;
+    }
+
+    #amouranthcrying {
+      width: 250px;
+      height: auto;
+    }
+
     .lifepoint {
       width: 10px;
       height: 10px;
@@ -230,6 +249,11 @@
     p {
       margin: 0;
       text-align: center;
+    }
+
+    h2 {
+      color: white;
+      font-size: 35px;
     }
 
     button {
