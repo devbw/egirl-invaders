@@ -1,6 +1,7 @@
 const character = document.getElementById("character");
 const count = document.getElementById("count");
 const start = document.getElementById("start");
+const lives = document.getElementById("lives");
 const level = document.getElementById("level");
 const container = document.querySelector(".global");
 const waitscreen = document.querySelector(".waitscreen");
@@ -11,11 +12,22 @@ let vitess = 0.8;
 let numbObstacles = 6;
 let lvl = 1;
 let isAttacking = false;
+let life = 6;
+const enemyRockets = [];
 
 // EVENTS
 
 start.addEventListener("click", () => {
   waitscreen.style.display = "none";
+  createObstacle(numbObstacles);
+  moveObstacles();
+  setLife();
+
+  setInterval(() => {
+    createEnemyRocket();
+  }, 2000);
+
+  moveEnemyRockets();
 });
 
 document.addEventListener("click", () => createRocket());
@@ -107,6 +119,57 @@ const createRocket = () => {
   moveRocket();
 };
 
+const createEnemyRocket = () => {
+  const obstacles = document.querySelectorAll(".obstacle");
+
+  obstacles.forEach((obstacle) => {
+    const obstacleRect = obstacle.getBoundingClientRect();
+    const enemyRocket = document.createElement("div");
+    enemyRocket.className = "enemyRocket";
+    enemyRocket.style.left = obstacleRect.left + 30 + "px";
+    enemyRocket.style.top = obstacleRect.top + 60 + "px";
+    container.appendChild(enemyRocket);
+
+    enemyRockets.push(enemyRocket); // Ajoutez chaque projectile à un tableau
+  });
+};
+
+const moveEnemyRockets = () => {
+  const characterRect = character.getBoundingClientRect();
+
+  enemyRockets.forEach((enemyRocket) => {
+    const enemyRocketRect = enemyRocket.getBoundingClientRect();
+    const newY = enemyRocketRect.top + 5;
+
+    if (newY <= container.clientHeight) {
+      enemyRocket.style.top = newY + "px";
+
+      if (
+        enemyRocketRect.left < characterRect.right &&
+        enemyRocketRect.right > characterRect.left &&
+        enemyRocketRect.top < characterRect.bottom &&
+        enemyRocketRect.bottom > characterRect.top
+      ) {
+        container.removeChild(enemyRocket);
+        life -= 1;
+        setLife();
+      }
+    } else {
+      container.removeChild(enemyRocket);
+    }
+  });
+
+  requestAnimationFrame(moveEnemyRockets);
+};
+
+const setLife = () => {
+  for (let i = 0; i < life; i++) {
+    const lifepoint = document.createElement("div");
+    lifepoint.className = "lifepoint";
+    lives.appendChild(lifepoint);
+  }
+};
+
 // UTILS FUNCTIONS
 
 const lvlUp = () => {
@@ -117,7 +180,7 @@ const lvlUp = () => {
     container.removeChild(obstacle);
   });
   createObstacle(numbObstacles);
-  console.log('coucouuuu')
+  console.log("coucouuuu");
 };
 
 const checkLvlUp = () => {
@@ -141,6 +204,11 @@ const checkLvlUp = () => {
     vitess = 1.6;
     lvlUp();
   }
+  if (egirlDied === 90) {
+    numbObstacles = 16;
+    vitess = 1.8;
+    lvlUp();
+  }
 };
 
 const randNum = () => {
@@ -152,6 +220,3 @@ const moveCharacter = () => {
 };
 
 // SETUP
-
-createObstacle(numbObstacles);
-moveObstacles();
