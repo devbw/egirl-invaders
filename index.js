@@ -152,7 +152,7 @@ const moveEnemyRockets = () => {
       ) {
         container.removeChild(enemyRocket);
         life -= 1;
-        setLife();
+        removeLife();
       }
     } else {
       container.removeChild(enemyRocket);
@@ -169,6 +169,20 @@ const setLife = () => {
     lives.appendChild(lifepoint);
   }
 };
+
+const removeLife = () => {
+  if (lives.childElementCount > 0) {
+    const lastLifePoint = lives.lastChild;
+    lives.removeChild(lastLifePoint);
+  }
+  if(life === 0) {
+    stopGame();
+  }
+}
+
+const stopGame = () => {
+  console.log('game over')
+}
 
 // UTILS FUNCTIONS
 
