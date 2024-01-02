@@ -1,26 +1,28 @@
 <template>
   <div class="Waitscreen">
-    <img src="../assets/egirlinvader.png" class="logo"/>
+    <img src="../assets/egirlinvader.png" class="logo" />
     <div class="actions">
       <button>SKINS</button>
       <button @click="toggleWaitscreen">START THE PURGE</button>
       <button>LEADERBOARD</button>
     </div>
-    
   </div>
 </template>
 
 <script setup>
-import { useWaitscreen } from '../composables/useWaitscreen'
+import { useWaitscreen } from "../composables/useWaitscreen";
 
 const { toggleWaitscreen } = useWaitscreen();
-
-
 </script>
 
 <style scoped>
 .Waitscreen {
-  background: radial-gradient(circle, rgba(182,100,152,1) 0%, rgba(18,26,91,1) 60%, rgb(8, 13, 49) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(182, 100, 152, 1) 0%,
+    rgba(18, 26, 91, 1) 60%,
+    rgb(8, 13, 49) 100%
+  );
   color: white;
   display: flex;
   flex-direction: column;

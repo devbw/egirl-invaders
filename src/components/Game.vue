@@ -1,25 +1,38 @@
 <template>
   <div
     class="Game"
-    ref="container"
     @click="createWeapon({ left: mouseX, top: characterRect.top })"
   >
     <div ref="character" class="mochi">
       <img src="../assets/Mochi.png" class="character" draggable="false" />
     </div>
+
     <div
       class="weapon"
       v-for="(weapon, index) in weapons"
       :key="index"
       :style="{ top: weapon.top + 'px', left: weapon.left + 'px' }"
     ></div>
+
+    <div
+      class="enemyWeapon"
+      v-for="(weapon, index) in enemyWeapon"
+      :key="index"
+      :style="{ top: weapon.top + 'px', left: weapon.left + 'px' }"
+    ></div>
+
     <img
-      src="../assets/egirl.png"
       v-for="(egirl, index) in enemies"
       :key="index"
+      src="../assets/egirl.png"
       class="enemy"
       :style="{ top: egirl.top + 'px', left: egirl.left + 'px' }"
+      draggable="false"
     />
+
+    <p class="score">Score : {{ enemiesKilled }}</p>
+
+    <p class="level">lvl : {{ lvl }}</p>
   </div>
 </template>
 
@@ -28,22 +41,18 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useCharacter } from "../composables/useCharacter";
 import { useEnemy } from "../composables/useEnemy";
 
-const { createWeapon, weapons } = useCharacter();
-const { setEnemy, enemies } = useEnemy();
+const { createWeapon, weapons, enemiesKilled, lvl } = useCharacter();
+const { enemies, enemyWeapon } = useEnemy();
 
 const character = ref();
-const container = ref();
 const mouseX = ref();
 const characterRect = ref();
-const skin = ref("../assets/Mochi.png");
 
 const getMouseX = (event) => {
   character.value.style.left = event.clientX + "px";
   characterRect.value = character.value.getBoundingClientRect();
   mouseX.value = event.clientX;
 };
-
-setEnemy(6);
 
 onMounted(() => window.addEventListener("mousemove", getMouseX));
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
@@ -91,5 +100,27 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   border-radius: 5px;
   background: white;
   position: absolute;
+}
+.enemyWeapon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgb(244, 121, 255);
+  border: 2px solid rgb(100, 255, 79);
+  position: absolute;
+}
+
+.score {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+}
+
+.level {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
 }
 </style>

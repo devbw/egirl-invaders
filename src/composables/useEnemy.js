@@ -1,6 +1,8 @@
 import { ref } from "vue";
 
 const enemies = ref([]);
+const enemyWeapon = ref([]);
+const speedWeapon = ref(5);
 const speed = ref(1);
 
 export const useEnemy = () => {
@@ -9,15 +11,38 @@ export const useEnemy = () => {
     moveEnemy();
   };
 
-  const addEnemy  = (enemy) => {
+  const createWeapon = () => {
+    enemies.value.forEach((enemy) => {
+      enemyWeapon.value.push({ left: enemy.left + 30, top: enemy.top + 60 })
+    })
+  }
+
+  const throwWeapon = () => {
+    if(enemies.value.length > 0) {
+      enemyWeapon.value.forEach((weapon, index) => {
+        if (weapon.top < window.innerHeight) {
+          weapon.top += speedWeapon.value;
+        } else {
+          enemyWeapon.value.splice(index, 1);
+        }
+      })
+    };
+    requestAnimationFrame(throwWeapon);
+  }
+
+  const addEnemy = (enemy) => {
     for (let i = 0; i < enemy; i++) {
       enemies.value.push({
         top: Math.floor(Math.random() * (window.innerHeight / 3)),
         left: Math.floor(Math.random() * (window.innerWidth - 20)),
-        direction: Math.random() < 0.5 ? 1 : -1,
+        direction: Math.random() < 0.5 ? 1 : -1
       });
     }
-  }
+  };
+
+  const cleanEnemies = () => {
+    enemies.value = [];
+  };
 
   const moveEnemy = () => {
     if (enemies.value.length > 0) {
@@ -37,6 +62,10 @@ export const useEnemy = () => {
   return {
     setEnemy,
     addEnemy,
+    cleanEnemies,
+    createWeapon,
+    throwWeapon,
     enemies,
+    enemyWeapon
   };
 };

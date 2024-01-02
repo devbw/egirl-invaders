@@ -7,6 +7,7 @@ const weapons = ref([]);
 const animationInProgress = ref(false);
 const life = ref(6);
 const lvl = ref(1);
+const enemiesKilled = ref(0);
 
 export const useCharacter = () => {
   const createWeapon = (weapon) => {
@@ -35,6 +36,7 @@ export const useCharacter = () => {
             ) {
               enemies.value.splice(indexEnemy, 1);
               weapons.value.splice(indexWeapon, 1);
+              enemiesKilled.value += 1;
               addEnemy(1);
             }
           });
@@ -57,5 +59,7 @@ export const useCharacter = () => {
     createWeapon,
     moveWeapon,
     weapons,
+    enemiesKilled,
+    lvl
   };
 };
