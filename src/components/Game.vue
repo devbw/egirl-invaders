@@ -3,8 +3,12 @@
     class="Game"
     @click="createWeapon({ left: mouseX, top: characterRect.top })"
   >
-    <div ref="character" class="mochi">
+    <div ref="character" class="mochi" id="character">
       <img src="../assets/Mochi.png" class="character" draggable="false" />
+    </div>
+
+    <div class="containerlife">
+      <div v-for="(points, index) in life" :key="index" class="life"></div>
     </div>
 
     <div
@@ -41,18 +45,19 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useCharacter } from "../composables/useCharacter";
 import { useEnemy } from "../composables/useEnemy";
 
-const { createWeapon, weapons, enemiesKilled, lvl } = useCharacter();
-const { enemies, enemyWeapon } = useEnemy();
+const { createWeapon, weapons, enemiesKilled, lvl, life } = useCharacter();
 
 const character = ref();
-const mouseX = ref();
 const characterRect = ref();
+const mouseX = ref();
 
 const getMouseX = (event) => {
   character.value.style.left = event.clientX + "px";
   characterRect.value = character.value.getBoundingClientRect();
   mouseX.value = event.clientX;
 };
+
+const { enemies, enemyWeapon } = useEnemy();
 
 onMounted(() => window.addEventListener("mousemove", getMouseX));
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
@@ -122,5 +127,22 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   bottom: 10px;
   right: 10px;
   color: white;
+}
+
+.life {
+  width: 8px;
+  height: 8px;
+  background: rgb(38, 235, 136);
+  border: 2px solid rgb(14, 105, 26);
+  border-radius: 50%;
+  margin-right: 3px;
+}
+
+.containerlife {
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>

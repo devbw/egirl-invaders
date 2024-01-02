@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { useEnemy } from "../composables/useEnemy";
+import { useCharacter } from "../composables/useCharacter";
 
 const { setEnemy, createWeapon, throwWeapon } = useEnemy();
 
