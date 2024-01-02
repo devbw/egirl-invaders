@@ -44,16 +44,6 @@ body {
   overflow: hidden;
 }
 
-.character {
-  width: 70px;
-  height: auto;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-
 .rocket {
   width: 5px;
   height: 10px;
