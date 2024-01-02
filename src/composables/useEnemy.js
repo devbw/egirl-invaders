@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 
 const enemies = ref([]);
+const speed = ref(1)
 
 export const useEnemy = () => {
 
@@ -26,12 +27,12 @@ export const useEnemy = () => {
             enemies.value.forEach((enemy) => {
 
                 enemy.left =
-                    enemy.left + enemy.direction * 0.5;
+                    enemy.left + enemy.direction * speed.value;
 
                 if (enemy.left > window.innerWidth && enemy.direction === 1) {
                     enemy.left = -10;
-                } else if (enemy.right < -10 && enemy.direction === -1) {
-                    enemy.left = window.innerWidth;
+                } else if (enemy.left <= 10 && enemy.direction === -1) {
+                    enemy.left = window.innerWidth - 10;
                 }
             });
             requestAnimationFrame(moveEnemy);
