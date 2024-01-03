@@ -1,23 +1,28 @@
 import { ref } from "vue";
 import { useEnemy } from "../composables/useEnemy";
 
-const { addEnemy, enemies } = useEnemy();
+const { addEnemy, enemies, cleanEnemies, cleanWeapons } = useEnemy();
 
 const weapons = ref([]);
 const animationInProgress = ref(false);
 const life = ref(6);
 const lvl = ref(1);
 const enemiesKilled = ref(0);
+const totalEnemiesKilled = ref(0);
+const lose = ref(false);
 
 window.addEventListener("loselifepoint", () => {
   loseLifePoint();
-})
+});
 
 const loseLifePoint = () => {
-  if(life.value > 0) {
-    life.value -= 1;
+  life.value -= 1;
+  if (life.value === 0) {
+    lose.value = true;
+    cleanEnemies();
+    cleanWeapons();
   }
-}
+};
 export const useCharacter = () => {
   const createWeapon = (weapon) => {
     weapons.value.push(weapon);
@@ -30,7 +35,6 @@ export const useCharacter = () => {
       moveWeapon();
     }
   };
-
 
   const moveWeapon = () => {
     if (weapons.value.length > 0) {
@@ -72,6 +76,7 @@ export const useCharacter = () => {
     weapons,
     enemiesKilled,
     lvl,
-    life
+    life,
+    lose
   };
 };

@@ -35,9 +35,7 @@ export const useEnemy = () => {
               weapon.top + 10 > characterRect.top
             ) {
               enemyWeapon.value.splice(index, 1);
-              window.dispatchEvent(
-                new CustomEvent("loselifepoint")
-              );
+              window.dispatchEvent(new CustomEvent("loselifepoint"));
             }
           } else {
             enemyWeapon.value.splice(index, 1);
@@ -62,6 +60,10 @@ export const useEnemy = () => {
     enemies.value = [];
   };
 
+  const cleanWeapons = () => {
+    enemyWeapon.value = [];
+  };
+
   const moveEnemy = () => {
     if (enemies.value.length > 0) {
       enemies.value.forEach((enemy) => {
@@ -83,6 +85,7 @@ export const useEnemy = () => {
     cleanEnemies,
     createWeapon,
     throwWeapon,
+    cleanWeapons,
     enemies,
     enemyWeapon,
   };

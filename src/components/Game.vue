@@ -11,6 +11,10 @@
       <div v-for="(points, index) in life" :key="index" class="life"></div>
     </div>
 
+    <p class="score">Score : {{ enemiesKilled }}</p>
+
+    <p class="level">lvl : {{ lvl }}</p>
+
     <div
       class="weapon"
       v-for="(weapon, index) in weapons"
@@ -34,9 +38,11 @@
       draggable="false"
     />
 
-    <p class="score">Score : {{ enemiesKilled }}</p>
+    <div v-if="lose" class="losecontainer">
+      <img src="../assets/amouranthcrying.png" class="loseimg"/>
+      <h2 class="losetext">Tu as succombé !</h2>
+    </div>
 
-    <p class="level">lvl : {{ lvl }}</p>
   </div>
 </template>
 
@@ -45,7 +51,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useCharacter } from "../composables/useCharacter";
 import { useEnemy } from "../composables/useEnemy";
 
-const { createWeapon, weapons, enemiesKilled, lvl, life } = useCharacter();
+const { createWeapon, weapons, enemiesKilled, lvl, life, lose } = useCharacter();
 
 const character = ref();
 const characterRect = ref();
@@ -144,5 +150,26 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   bottom: 10px;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.losecontainer {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loseimg {
+  width: 200px;
+  height: auto;
+}
+
+.losetext {
+  font-size: 35px;
+  color: white;
+  text-align: center;
 }
 </style>
