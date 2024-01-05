@@ -1,8 +1,7 @@
 import { ref } from "vue";
 import { useEnemy } from "../composables/useEnemy";
-import { useCharacter } from "../composables/useCharacter";
 
-const { setEnemy, createWeapon, throwWeapon } = useEnemy();
+const { setEnemy, createEnemyWeapon, throwWeapon } = useEnemy();
 
 const isWaitscreen = ref(true);
 
@@ -11,7 +10,7 @@ export const useWaitscreen = () => {
     isWaitscreen.value = !isWaitscreen.value;
     setEnemy(6);
     setInterval(() => {
-      createWeapon();
+      createEnemyWeapon();
     }, 2000);
 
     throwWeapon();

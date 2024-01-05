@@ -6,12 +6,13 @@ const speedWeapon = ref(5);
 const speed = ref(1);
 
 export const useEnemy = () => {
+
   const setEnemy = (enemy) => {
     addEnemy(enemy);
     moveEnemy();
   };
 
-  const createWeapon = () => {
+  const createEnemyWeapon = () => {
     enemies.value.forEach((enemy) => {
       enemyWeapon.value.push({
         left: enemy.left + 30,
@@ -19,6 +20,15 @@ export const useEnemy = () => {
       });
     });
   };
+
+  const manageSpeed = (factor) => {
+    speed.value += factor;
+    console.log(speed.value);
+  }
+
+  const manageSpeedWeapon = (factor) => {
+    speedWeapon.value += factor;
+  }
 
   const throwWeapon = () => {
     if (enemies.value.length > 0) {
@@ -83,9 +93,11 @@ export const useEnemy = () => {
     setEnemy,
     addEnemy,
     cleanEnemies,
-    createWeapon,
+    createEnemyWeapon,
     throwWeapon,
     cleanWeapons,
+    manageSpeed,
+    manageSpeedWeapon,
     enemies,
     enemyWeapon,
   };

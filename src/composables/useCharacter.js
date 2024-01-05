@@ -23,10 +23,18 @@ const loseLifePoint = () => {
     cleanWeapons();
   }
 };
+
 export const useCharacter = () => {
   const createWeapon = (weapon) => {
     weapons.value.push(weapon);
     startMoveAnimation();
+  };
+
+  const manageLvl = () => {
+    if (enemiesKilled.value === lvl.value * 10) {
+      lvl.value += 1;
+      window.dispatchEvent(new CustomEvent("lvlup", { detail: lvl.value }));
+    }
   };
 
   const startMoveAnimation = () => {
@@ -52,6 +60,7 @@ export const useCharacter = () => {
               weapons.value.splice(indexWeapon, 1);
               enemiesKilled.value += 1;
               addEnemy(1);
+              manageLvl();
             }
           });
         } else {
@@ -77,6 +86,6 @@ export const useCharacter = () => {
     enemiesKilled,
     lvl,
     life,
-    lose
+    lose,
   };
 };

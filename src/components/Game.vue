@@ -63,7 +63,14 @@ const getMouseX = (event) => {
   mouseX.value = event.clientX;
 };
 
-const { enemies, enemyWeapon } = useEnemy();
+const { enemies, enemyWeapon, manageSpeed, manageSpeedWeapon, createEnemyWeapon, addEnemy } = useEnemy();
+
+window.addEventListener('lvlup', () => {
+    manageSpeed(0.05);
+    manageSpeedWeapon(0.11);
+    addEnemy(1);
+    createEnemyWeapon();
+  })
 
 onMounted(() => window.addEventListener("mousemove", getMouseX));
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
