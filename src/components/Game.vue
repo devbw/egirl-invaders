@@ -38,11 +38,17 @@
       draggable="false"
     />
 
+    <img
+      v-show="isBoss"
+      src="../assets/amouranthcrying.png"
+      draggable="false"
+      class="boss"
+    />
+
     <div v-if="lose" class="losecontainer">
-      <img src="../assets/amouranthcrying.png" class="loseimg"/>
+      <img src="../assets/amouranthcrying.png" class="loseimg" />
       <h2 class="losetext">Tu as succombé !</h2>
     </div>
-
   </div>
 </template>
 
@@ -51,7 +57,8 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { useCharacter } from "../composables/useCharacter";
 import { useEnemy } from "../composables/useEnemy";
 
-const { createWeapon, weapons, enemiesKilled, lvl, life, lose } = useCharacter();
+const { createWeapon, weapons, enemiesKilled, lvl, life, lose } =
+  useCharacter();
 
 const character = ref();
 const characterRect = ref();
@@ -63,16 +70,34 @@ const getMouseX = (event) => {
   mouseX.value = event.clientX;
 };
 
-const { enemies, enemyWeapon, manageSpeed, manageSpeedWeapon, createEnemyWeapon, addEnemy } = useEnemy();
+const {
+  enemies,
+  enemyWeapon,
+  manageSpeed,
+  manageSpeedWeapon,
+  createEnemyWeapon,
+  addEnemy,
+  activeBoss,
+  isBoss,
+} = useEnemy();
 
-window.addEventListener('lvlup', () => {
+console.log(isBoss.value);
+
+window.addEventListener("lvlup", () => {
+  if (lvl.value % 5 === 0) {
+    //window.dispatchEvent(new CustomEvent("activeBoss"));
+  } else {
     manageSpeed(0.05);
     manageSpeedWeapon(0.08);
     addEnemy(1);
     createEnemyWeapon();
-  })
+  }
+});
 
-onMounted(() => window.addEventListener("mousemove", getMouseX));
+onMounted(() => {
+  window.addEventListener("mousemove", getMouseX);
+  window.addEventListener("activeBoss", activeBoss());
+});
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 </script>
 
@@ -102,6 +127,7 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 .character {
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 0 5px rgb(31, 31, 31));
 }
 
 .enemy {
@@ -110,6 +136,7 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   height: 60px;
   outline: none;
   user-select: none;
+  filter: drop-shadow(0 0 4px rgb(0, 0, 0));
 }
 
 .weapon {
@@ -126,6 +153,15 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   background: rgb(244, 121, 255);
   border: 2px solid rgb(100, 255, 79);
   position: absolute;
+}
+
+.boss {
+  width: 200px;
+  height: auto;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 50%);
 }
 
 .score {
