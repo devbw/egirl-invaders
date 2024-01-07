@@ -9,7 +9,10 @@ const isBoss = ref(false);
 export const useEnemy = () => {
 
   const activeBoss = () => {
+    cleanEnemies();
+    cleanWeapons();
     isBoss.value = true;
+    console.log(isBoss.value);
   }
 
   const setEnemy = (enemy) => {

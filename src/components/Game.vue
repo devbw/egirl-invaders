@@ -38,12 +38,13 @@
       draggable="false"
     />
 
-    <img
-      v-show="isBoss"
-      src="../assets/amouranthcrying.png"
-      draggable="false"
-      class="boss"
-    />
+    <div v-if="isBoss">
+      <img
+        src="../assets/amouranthcrying.png"
+        draggable="false"
+        class="boss"
+      />
+    </div>
 
     <div v-if="lose" class="losecontainer">
       <img src="../assets/amouranthcrying.png" class="loseimg" />
@@ -85,7 +86,7 @@ console.log(isBoss.value);
 
 window.addEventListener("lvlup", () => {
   if (lvl.value % 5 === 0) {
-    //window.dispatchEvent(new CustomEvent("activeBoss"));
+    window.dispatchEvent(new CustomEvent("activeBoss"));
   } else {
     manageSpeed(0.05);
     manageSpeedWeapon(0.08);
@@ -96,7 +97,7 @@ window.addEventListener("lvlup", () => {
 
 onMounted(() => {
   window.addEventListener("mousemove", getMouseX);
-  window.addEventListener("activeBoss", activeBoss());
+  //window.addEventListener("activeBoss", activeBoss);
 });
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 </script>
