@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "git": "npm run build && git add . && git commit -m",
+    "postgit": "git push && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "vue": "^3.3.4"
