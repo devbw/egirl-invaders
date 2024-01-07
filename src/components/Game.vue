@@ -67,7 +67,7 @@ const { enemies, enemyWeapon, manageSpeed, manageSpeedWeapon, createEnemyWeapon,
 
 window.addEventListener('lvlup', () => {
     manageSpeed(0.05);
-    manageSpeedWeapon(0.08);
+    manageSpeedWeapon(0.09);
     addEnemy(1);
     createEnemyWeapon();
   })

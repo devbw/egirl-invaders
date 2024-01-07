@@ -1,5 +1,5 @@
 export default {
-  base: '/',
+  base: '/dist/',
   assetsDir: '_assets',
 
 }
