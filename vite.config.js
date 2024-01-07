@@ -1,4 +1,3 @@
 export default {
-  base: '/',
-  assetsDir: '_assets',
+  base: '/egirl-invaders'
 }
