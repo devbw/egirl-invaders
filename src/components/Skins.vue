@@ -31,7 +31,9 @@ const skins = [
 ];
 
 const getPathImage = (filename) => {
-  return `src/assets/skins/${filename}`;
+  const imagePath = `/skins/${filename}`;
+  const imageUrl = import.meta.env.BASE_URL + imagePath;
+  return imageUrl;
 };
 </script>
 

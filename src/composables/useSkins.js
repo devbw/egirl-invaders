@@ -9,7 +9,9 @@ export const useSkins = () => {
   };
 
   const sendSkins = (skin) => {
-    usedSkin.value = `src/assets/skins/${skin}`;
+    const imagePath = `/skins/${skin}`;
+    const imageUrl = import.meta.env.BASE_URL + imagePath;
+    usedSkin.value = imageUrl;
     window.dispatchEvent(new CustomEvent("skinChosed"));
   }
 
