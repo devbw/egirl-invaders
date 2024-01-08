@@ -2,17 +2,27 @@
   <div class="Waitscreen">
     <img src="../assets/egirlinvader.png" class="logo" />
     <div class="actions">
-      <button>SKINS</button>
+      <button @click="toggleSkins">SKINS</button>
       <button @click="toggleWaitscreen">START THE PURGE</button>
       <button>LEADERBOARD</button>
     </div>
+    <Skins v-if="skins"/>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import Skins from "./Skins.vue";
 import { useWaitscreen } from "../composables/useWaitscreen";
 
 const { toggleWaitscreen } = useWaitscreen();
+const skins = ref(false);
+const toggleSkins = () => {
+  skins.value = !skins.value;
+}
+window.addEventListener("skinChosed", () => {
+  skins.value = !skins.value;
+})
 </script>
 
 <style scoped>
@@ -31,6 +41,7 @@ const { toggleWaitscreen } = useWaitscreen();
   height: 100vh;
   padding: 0 40px;
   overflow: hidden;
+  position: relative;
 }
 
 .logo {

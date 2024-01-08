@@ -12,7 +12,6 @@ export const useEnemy = () => {
     cleanEnemies();
     cleanWeapons();
     isBoss.value = true;
-    console.log(isBoss.value);
   }
 
   const setEnemy = (enemy) => {
@@ -31,7 +30,6 @@ export const useEnemy = () => {
 
   const manageSpeed = (factor) => {
     speed.value += factor;
-    console.log(speed.value);
   }
 
   const manageSpeedWeapon = (factor) => {

@@ -4,7 +4,7 @@
     @click="createWeapon({ left: mouseX, top: characterRect.top })"
   >
     <div ref="character" class="mochi" id="character">
-      <img src="../assets/Mochi.png" class="character" draggable="false" />
+      <img :src="usedSkin" class="character" draggable="false" />
     </div>
 
     <div class="containerlife">
@@ -39,11 +39,7 @@
     />
 
     <div v-if="isBoss">
-      <img
-        src="../assets/amouranthcrying.png"
-        draggable="false"
-        class="boss"
-      />
+      <img src="../assets/amouranthcrying.png" draggable="false" class="boss" />
     </div>
 
     <div v-if="lose" class="losecontainer">
@@ -57,9 +53,11 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useCharacter } from "../composables/useCharacter";
 import { useEnemy } from "../composables/useEnemy";
+import { useSkins } from "../composables/useSkins";
 
 const { createWeapon, weapons, enemiesKilled, lvl, life, lose } =
   useCharacter();
+const { usedSkin } = useSkins();
 
 const character = ref();
 const characterRect = ref();
@@ -71,6 +69,8 @@ const getMouseX = (event) => {
   mouseX.value = event.clientX;
 };
 
+console.log(usedSkin);
+
 const {
   enemies,
   enemyWeapon,
@@ -81,8 +81,6 @@ const {
   activeBoss,
   isBoss,
 } = useEnemy();
-
-console.log(isBoss.value);
 
 window.addEventListener("lvlup", () => {
   if (lvl.value % 5 === 0) {
