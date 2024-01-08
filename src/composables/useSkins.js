@@ -1,7 +1,10 @@
 import { ref } from "vue";
 
 const isSkins = ref(false);
-const usedSkin = ref('src/assets/skins/Mochi.png')
+const usedSkin = ref(imageUrl)
+
+const imagePath = `/skins/Mochi.png`;
+const imageUrl = import.meta.env.BASE_URL + imagePath;
 
 export const useSkins = () => {
   const toggleSkins = () => {
