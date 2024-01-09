@@ -42,9 +42,16 @@
       <img src="../assets/amouranthcrying.png" draggable="false" class="boss" />
     </div>
 
+    <div v-if="lose" class="losecontainer__lose">
+      <h2 class="losetext">Tu es un gros baiseur..</h2>
+      <div class="losecontainer__lose__score">
+        <p>Score : {{ enemiesKilled }}</p>
+        <p>lvl : {{ lvl }}</p>
+        <img :src="usedSkin" draggable="false" class="losecontainer__lose__score__skin"/>
+      </div>
+    </div>
+
     <div v-if="lose" class="losecontainer">
-      <img src="../assets/amouranthcrying.png" class="loseimg" />
-      <h2 class="losetext">Tu as succombé !</h2>
     </div>
   </div>
 </template>
@@ -196,12 +203,50 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 
 .losecontainer {
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 250px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: url('../assets/amouranthcrying.png') repeat;
+  background-size: auto 100px;
+  opacity: 0.15;
+  z-index: 99;
+}
+
+.losecontainer__lose {
+  width: 50%;
+  height: 50%;
+  background: white;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+.losecontainer__lose h2 {
+  color: rgb(126, 16, 136);
+}
+
+.losecontainer__lose__score {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.losecontainer__lose__score p {
+  color: rgb(126, 16, 136);
+  margin-bottom: 10px;
+}
+
+.losecontainer__lose__score__skin {
+  margin-top: 25px;
 }
 
 .loseimg {
