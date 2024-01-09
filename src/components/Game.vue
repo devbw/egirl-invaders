@@ -247,6 +247,8 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 
 .losecontainer__lose__score__skin {
   margin-top: 25px;
+  width: 100px;
+  height: auto;
 }
 
 .loseimg {
