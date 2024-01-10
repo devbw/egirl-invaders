@@ -221,7 +221,6 @@ const type = async (isType, type) => {
 }
 
 .losecontainer__lose {
-  width: 50%;
   height: 50%;
   background: white;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -231,6 +230,7 @@ const type = async (isType, type) => {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
+  padding: 20px 40px;
 }
 
 .losecontainer__lose h2 {
