@@ -47,12 +47,15 @@
       <div class="losecontainer__lose__score">
         <p>Score : {{ enemiesKilled }}</p>
         <p>lvl : {{ lvl }}</p>
-        <img :src="usedSkin" draggable="false" class="losecontainer__lose__score__skin"/>
+        <img
+          :src="usedSkin"
+          draggable="false"
+          class="losecontainer__lose__score__skin"
+        />
       </div>
     </div>
 
-    <div v-if="lose" class="losecontainer">
-    </div>
+    <div v-if="lose" class="losecontainer"></div>
   </div>
 </template>
 
@@ -105,16 +108,17 @@ onMounted(() => {
   //window.addEventListener("activeBoss", activeBoss);
 });
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
+
+const type = async (isType, type) => {
+  return await newMedia.related(type).create(specificMediaInfos);
+};
 </script>
 
 <style>
 .Game {
-  background: radial-gradient(
-    circle,
-    rgba(182, 100, 152, 1) 0%,
-    rgba(18, 26, 91, 1) 60%,
-    rgb(8, 13, 49) 100%
-  );
+  background: url('../assets/backfour.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   overflow: hidden;
   position: relative;
@@ -210,7 +214,7 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url('../assets/amouranthcrying.png') repeat;
+  background: url("../assets/amouranthcrying.png") repeat;
   background-size: auto 100px;
   opacity: 0.15;
   z-index: 99;

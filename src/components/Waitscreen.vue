@@ -27,12 +27,9 @@ window.addEventListener("skinChosed", () => {
 
 <style scoped>
 .Waitscreen {
-  background: radial-gradient(
-    circle,
-    rgba(182, 100, 152, 1) 0%,
-    rgba(18, 26, 91, 1) 60%,
-    rgb(8, 13, 49) 100%
-  );
+  background: url('../assets/backone.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
   display: flex;
   flex-direction: column;
