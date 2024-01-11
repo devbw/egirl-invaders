@@ -39,7 +39,11 @@
     />
 
     <div v-if="isBoss">
-      <img src="https://i.goopics.net/q44rz8.png" draggable="false" class="boss" />
+      <img
+        src="https://i.goopics.net/q44rz8.png"
+        draggable="false"
+        class="boss"
+      />
     </div>
 
     <div v-if="lose" class="losecontainer__lose">
@@ -52,6 +56,12 @@
           draggable="false"
           class="losecontainer__lose__score__skin"
         />
+      </div>
+      <div class="losecontainer__lose__thanks">
+        <p>
+          Merci pour leur aide et idées : KeroSan, Chapelain, Hunt, Honda,
+          Heavent, Esypso
+        </p>
       </div>
     </div>
 
@@ -114,7 +124,7 @@ const type = async (isType, type) => {
 
 <style>
 .Game {
-  background: url('https://i.goopics.net/xppvjd.png');
+  background: url("https://i.goopics.net/xppvjd.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -228,11 +238,22 @@ const type = async (isType, type) => {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  padding: 20px 40px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .losecontainer__lose h2 {
   color: rgb(126, 16, 136);
+  margin-top: 0;
+}
+
+.losecontainer__lose__thanks {
+  color: white;
+  background: rgb(126, 16, 136);
+  padding: 10px 15px;
+  border-radius: 5px;
 }
 
 .losecontainer__lose__score {
@@ -259,7 +280,7 @@ const type = async (isType, type) => {
 }
 
 .losetext {
-  font-size: 35px;
+  font-size: 2rem;
   color: white;
   text-align: center;
 }
