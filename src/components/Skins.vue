@@ -28,6 +28,7 @@ const skins = [
   "https://i.goopics.net/7infp7.png",
   "https://i.goopics.net/x2ph1o.png",
   "https://i.goopics.net/xo80k5.png",
+  "https://i.goopics.net/chud72.png",
 ];
 
 const getPathImage = (filename) => {

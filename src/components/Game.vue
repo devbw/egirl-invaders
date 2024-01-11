@@ -93,7 +93,9 @@
           </p>
         </div>
       </div>
+      <button v-if="lose" @click="reload">Restart</button>
     </div>
+
 
     <div v-if="lose" class="losecontainer"></div>
   </div>
@@ -129,6 +131,10 @@ const {
   activeBoss,
   isBoss,
 } = useEnemy();
+
+const reload = () => {
+  window.location.reload();
+}
 
 window.addEventListener("lvlup", () => {
   if (lvl.value % 5 === 0) {
