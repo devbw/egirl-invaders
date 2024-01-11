@@ -32,14 +32,14 @@
     <img
       v-for="(egirl, index) in enemies"
       :key="index"
-      src="../assets/egirl.png"
+      src="https://i.goopics.net/7p292c.png"
       class="enemy"
       :style="{ top: egirl.top + 'px', left: egirl.left + 'px' }"
       draggable="false"
     />
 
     <div v-if="isBoss">
-      <img src="../assets/amouranthcrying.png" draggable="false" class="boss" />
+      <img src="https://i.goopics.net/q44rz8.png" draggable="false" class="boss" />
     </div>
 
     <div v-if="lose" class="losecontainer__lose">
@@ -79,8 +79,6 @@ const getMouseX = (event) => {
   mouseX.value = event.clientX;
 };
 
-console.log(usedSkin);
-
 const {
   enemies,
   enemyWeapon,
@@ -116,7 +114,7 @@ const type = async (isType, type) => {
 
 <style>
 .Game {
-  background: url('../assets/backfour.png');
+  background: url('https://i.goopics.net/xppvjd.png');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -143,7 +141,7 @@ const type = async (isType, type) => {
 .enemy {
   position: absolute;
   width: 60px;
-  height: 60px;
+  height: auto;
   outline: none;
   user-select: none;
   filter: drop-shadow(0 0 4px rgb(0, 0, 0));
@@ -214,7 +212,7 @@ const type = async (isType, type) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url("../assets/amouranthcrying.png") repeat;
+  background: url("https://i.goopics.net/q44rz8.png") repeat;
   background-size: auto 100px;
   opacity: 0.15;
   z-index: 99;

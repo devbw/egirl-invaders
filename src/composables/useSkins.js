@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 const isSkins = ref(false);
-const usedSkin = ref(`${import.meta.env.BASE_URL}/skins/Mochi.png`)
+const usedSkin = ref('https://i.goopics.net/v6suhm.png')
 
 export const useSkins = () => {
   const toggleSkins = () => {
@@ -9,9 +9,7 @@ export const useSkins = () => {
   };
 
   const sendSkins = (skin) => {
-    const imagePath = `/skins/${skin}`;
-    const imageUrl = import.meta.env.BASE_URL + imagePath;
-    usedSkin.value = imageUrl;
+    usedSkin.value = skin;
     window.dispatchEvent(new CustomEvent("skinChosed"));
   }
 

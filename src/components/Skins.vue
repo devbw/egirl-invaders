@@ -18,22 +18,20 @@ import { useSkins } from "../composables/useSkins";
 const { sendSkins } = useSkins();
 
 const skins = [
-  "Mochi.png",
-  "MochiActually.png",
-  "MochiJester.png",
-  "MochiSamedi.png",
-  "MochiVex.png",
-  "Macha.png",
-  "Machad.png",
-  "Machagreus.png",
-  "MachaPirate.png",
-  "MachRSA.png",
+  "https://i.goopics.net/v6suhm.png",
+  "https://i.goopics.net/q4nqjv.png",
+  "https://i.goopics.net/3glip4.png",
+  "https://i.goopics.net/s9owz8.png",
+  "https://i.goopics.net/fungp6.png",
+  "https://i.goopics.net/ubffqm.png",
+  "https://i.goopics.net/5bwk4a.png",
+  "https://i.goopics.net/7infp7.png",
+  "https://i.goopics.net/x2ph1o.png",
+  "https://i.goopics.net/xo80k5.png",
 ];
 
 const getPathImage = (filename) => {
-  const imagePath = `/skins/${filename}`;
-  const imageUrl = import.meta.env.BASE_URL + imagePath;
-  return imageUrl;
+  return filename;
 };
 </script>
 
