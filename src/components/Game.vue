@@ -48,7 +48,9 @@
 
     <div v-if="lose" class="losecontainer__lose">
       <div class="losebackground">
-        <h2 class="losetext">Tu es un gros baiseur..</h2>
+        <div class="losetext">
+          <h2 >Tu es un gros baiseur..</h2>
+        </div>
         <div class="losecontainer__lose__score">
           <div class="losecontainer__lose__score__bloc">
             <svg
@@ -250,9 +252,6 @@ const type = async (isType, type) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: url("https://i.goopics.net/q44rz8.png") repeat;
-  background-size: auto 100px;
-  opacity: 0.15;
   z-index: 99;
 }
 
@@ -261,7 +260,7 @@ const type = async (isType, type) => {
   background-color: rgb(10, 16, 51);
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  border: 10px solid white;
+  border: 10px solid rgb(126, 16, 136);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -283,8 +282,9 @@ const type = async (isType, type) => {
 }
 
 .losecontainer__lose h2 {
-  color: rgb(255, 255, 255);
-  margin-top: 0;
+  color: rgb(255, 233, 35);
+  margin: 0;
+  font-size: 1.3em;
 }
 
 .losecontainer__lose__thanks {
@@ -332,8 +332,9 @@ const type = async (isType, type) => {
 }
 
 .losetext {
-  font-size: 2rem;
-  color: white;
   text-align: center;
+  background: rgb(126, 16, 136);
+  border-radius: 5px;
+  padding: 7px 13px;
 }
 </style>
