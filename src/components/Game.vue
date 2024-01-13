@@ -43,13 +43,15 @@
         src="https://i.goopics.net/q44rz8.png"
         draggable="false"
         class="boss"
+        :style="{ left: mouseX + 'px' }"
+        ref="boss"
       />
     </div>
 
     <div v-if="lose" class="losecontainer__lose">
       <div class="losebackground">
         <div class="losetext">
-          <h2 >Tu es un gros baiseur..</h2>
+          <h2>Tu es un gros baiseur..</h2>
         </div>
         <div class="losecontainer__lose__score">
           <div class="losecontainer__lose__score__bloc">
@@ -96,7 +98,6 @@
       <button v-if="lose" @click="reload">Restart</button>
     </div>
 
-
     <div v-if="lose" class="losecontainer"></div>
   </div>
 </template>
@@ -134,7 +135,7 @@ const {
 
 const reload = () => {
   window.location.reload();
-}
+};
 
 window.addEventListener("lvlup", () => {
   if (lvl.value % 5 === 0) {
@@ -152,10 +153,6 @@ onMounted(() => {
   //window.addEventListener("activeBoss", activeBoss);
 });
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
-
-const type = async (isType, type) => {
-  return await newMedia.related(type).create(specificMediaInfos);
-};
 </script>
 
 <style>
@@ -214,8 +211,8 @@ const type = async (isType, type) => {
   height: auto;
   position: absolute;
   top: 20px;
-  left: 50%;
   transform: translate(-50%, 50%);
+  user-select: none;
 }
 
 .score {
