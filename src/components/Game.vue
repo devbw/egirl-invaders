@@ -15,19 +15,21 @@
 
     <p class="level">lvl : {{ lvl }}</p>
 
-    <div
+    <img
       class="weapon"
       v-for="(weapon, index) in weapons"
       :key="index"
       :style="{ top: weapon.top + 'px', left: weapon.left + 'px' }"
-    ></div>
+      src="https://i.goopics.net/ecwluf.png"
+    />
 
-    <div
+    <img
       class="enemyWeapon"
       v-for="(weapon, index) in enemyWeapon"
       :key="index"
       :style="{ top: weapon.top + 'px', left: weapon.left + 'px' }"
-    ></div>
+      src="https://i.goopics.net/k6uhat.png"
+    />
 
     <img
       v-for="(egirl, index) in enemies"
@@ -191,18 +193,14 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 }
 
 .weapon {
-  width: 5px;
-  height: 10px;
-  border-radius: 5px;
-  background: white;
+  width: 15px;
+  height: auto;
   position: absolute;
 }
+
 .enemyWeapon {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgb(244, 121, 255);
-  border: 2px solid rgb(100, 255, 79);
+  width: 15px;
+  height: auto;
   position: absolute;
 }
 
