@@ -40,16 +40,6 @@
       draggable="false"
     />
 
-    <div v-if="isBoss">
-      <img
-        src="https://i.goopics.net/q44rz8.png"
-        draggable="false"
-        class="boss"
-        :style="{ left: mouseX + 'px' }"
-        ref="boss"
-      />
-    </div>
-
     <div v-if="lose" class="losecontainer__lose">
       <div class="losebackground">
         <div class="losetext">
@@ -130,9 +120,7 @@ const {
   manageSpeed,
   manageSpeedWeapon,
   createEnemyWeapon,
-  addEnemy,
-  activeBoss,
-  isBoss,
+  addEnemy
 } = useEnemy();
 
 const reload = () => {
@@ -140,19 +128,14 @@ const reload = () => {
 };
 
 window.addEventListener("lvlup", () => {
-  if (lvl.value % 5 === 0) {
-    window.dispatchEvent(new CustomEvent("activeBoss"));
-  } else {
-    manageSpeed(0.05);
-    manageSpeedWeapon(0.08);
-    addEnemy(1);
-    createEnemyWeapon();
-  }
+  manageSpeed(0.05);
+  manageSpeedWeapon(0.08);
+  addEnemy(1);
+  createEnemyWeapon();
 });
 
 onMounted(() => {
   window.addEventListener("mousemove", getMouseX);
-  //window.addEventListener("activeBoss", activeBoss);
 });
 onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
 </script>
@@ -202,15 +185,6 @@ onUnmounted(() => window.removeEventListener("mousemove", getMouseX));
   width: 15px;
   height: auto;
   position: absolute;
-}
-
-.boss {
-  width: 200px;
-  height: auto;
-  position: absolute;
-  top: 20px;
-  transform: translate(-50%, 50%);
-  user-select: none;
 }
 
 .score {

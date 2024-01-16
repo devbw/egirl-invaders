@@ -4,15 +4,8 @@ const enemies = ref([]);
 const enemyWeapon = ref([]);
 const speedWeapon = ref(5);
 const speed = ref(1);
-const isBoss = ref(false);
 
 export const useEnemy = () => {
-
-  const activeBoss = () => {
-    cleanEnemies();
-    cleanWeapons();
-    isBoss.value = true;
-  }
 
   const setEnemy = (enemy) => {
     addEnemy(enemy);
@@ -104,9 +97,7 @@ export const useEnemy = () => {
     cleanWeapons,
     manageSpeed,
     manageSpeedWeapon,
-    activeBoss,
     enemies,
-    enemyWeapon,
-    isBoss
+    enemyWeapon
   };
 };
