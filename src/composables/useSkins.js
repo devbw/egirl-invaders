@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 const isSkins = ref(false);
-const usedSkin = ref('https://i.goopics.net/v6suhm.png')
+const usedSkin = ref("https://i.goopics.net/v6suhm.png");
 
 export const useSkins = () => {
   const toggleSkins = () => {
@@ -11,7 +11,7 @@ export const useSkins = () => {
   const sendSkins = (skin) => {
     usedSkin.value = skin;
     window.dispatchEvent(new CustomEvent("skinChosed"));
-  }
+  };
 
   return {
     toggleSkins,

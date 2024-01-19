@@ -6,7 +6,6 @@ const speedWeapon = ref(5);
 const speed = ref(1);
 
 export const useEnemy = () => {
-
   const setEnemy = (enemy) => {
     addEnemy(enemy);
     moveEnemy();
@@ -23,11 +22,11 @@ export const useEnemy = () => {
 
   const manageSpeed = (factor) => {
     speed.value += factor;
-  }
+  };
 
   const manageSpeedWeapon = (factor) => {
     speedWeapon.value += factor;
-  }
+  };
 
   const throwWeapon = () => {
     if (enemies.value.length > 0) {
@@ -98,6 +97,6 @@ export const useEnemy = () => {
     manageSpeed,
     manageSpeedWeapon,
     enemies,
-    enemyWeapon
+    enemyWeapon,
   };
 };
