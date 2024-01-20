@@ -15,6 +15,10 @@ window.addEventListener("loselifepoint", () => {
   loseLifePoint();
 });
 
+window.addEventListener("getlifepoint", () => {
+  getLifePoint();
+});
+
 const loseLifePoint = () => {
   life.value -= 1;
   if (life.value === 0) {
@@ -22,6 +26,10 @@ const loseLifePoint = () => {
     cleanEnemies();
     cleanWeapons();
   }
+};
+
+const getLifePoint = () => {
+  life.value += 1;
 };
 
 export const useCharacter = () => {
@@ -36,6 +44,12 @@ export const useCharacter = () => {
       window.dispatchEvent(new CustomEvent("lvlup", { detail: lvl.value }));
     }
   };
+
+  const manageBonus = () => {
+    if (enemiesKilled.value % 25 === 0) {
+      window.dispatchEvent(new CustomEvent("addBonusLife"));
+    }
+  }
 
   const startMoveAnimation = () => {
     if (!animationInProgress.value) {
@@ -61,6 +75,7 @@ export const useCharacter = () => {
               enemiesKilled.value += 1;
               addEnemy(1);
               manageLvl();
+              manageBonus();
             }
           });
         } else {

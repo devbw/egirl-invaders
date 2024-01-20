@@ -1,7 +1,9 @@
 import { ref } from "vue";
 import { useEnemy } from "../composables/useEnemy";
+import { useBonus } from "../composables/useBonus";
 
 const { setEnemy, createEnemyWeapon, throwWeapon } = useEnemy();
+const { throwBonus } = useBonus();
 
 const isWaitscreen = ref(true);
 
@@ -14,6 +16,7 @@ export const useWaitscreen = () => {
     }, 2000);
 
     throwWeapon();
+    throwBonus();
   };
 
   return {

@@ -34,12 +34,14 @@
 import { ref } from "vue";
 import Skins from "./Skins.vue";
 import { useWaitscreen } from "../composables/useWaitscreen";
+import { useBonus } from "../composables/useBonus";
 
 const { toggleWaitscreen } = useWaitscreen();
 const skins = ref(false);
 const toggleSkins = () => {
   skins.value = !skins.value;
 };
+
 window.addEventListener("skinChosed", () => {
   skins.value = !skins.value;
 });
