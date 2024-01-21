@@ -17,7 +17,7 @@ export const useBonus = () => {
         const characterRect = character.getBoundingClientRect();
         bonus.value.forEach((bonu, index) => {
           if (bonu.top < window.innerHeight) {
-            bonu.top += 10;
+            bonu.top += 5;
             if (
               bonu.left < characterRect.right &&
               bonu.left + 10 > characterRect.left &&
